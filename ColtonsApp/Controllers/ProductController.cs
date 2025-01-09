@@ -1,5 +1,5 @@
 ﻿using ColtonsApp.DatabaseContexts;
-using ColtonsApp.ProducDependencies;
+using ColtonsApp.Items;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,10 +18,17 @@ namespace ColtonsApp.Controllers
             _context = context;
         }
 
+        //TODO - need to have it so ID shows when get requests are made, but not when post requests are made
+        // may have to not use the FromBody attribute, or fanagle JsonIgnore
+
+        //TODO - create a data access layer to holde the query building. keep all db logic in that layer
+
+        //TODO - write some damn tests for TDD
+
         // GET api/product
         [HttpGet()]
-        [Route("GetProduct")]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProduct()
+        [Route("GetProducts")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
             var query = _context.Products.AsQueryable();
 
@@ -32,18 +39,24 @@ namespace ColtonsApp.Controllers
 
         // GET api/product/{id}
         [HttpGet]
-        [Route("GetProduct/{id}")]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProduct( Guid id )
+        [Route("GetProduct")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetProduct(Guid? id = null, string? name = null )
         {
             var query = _context.Products.AsQueryable();
 
-            if (id != Guid.Empty)
+            if (id != Guid.Empty
+                && id != null)
             {
                 query = query.Where(m => m.Id.Equals(id));  // Filter by Id
             }
+            else if( !string.IsNullOrEmpty(name))
+            {
+                query = query.Where(m => m.Name.Contains(name));  // Filter by Name
+            }
             else
             {
-                return BadRequest($"Missing Parameter: {nameof(id)}");
+                //make error builder
+                return BadRequest($"Missing Parameter(s): {nameof(id)}, {nameof(name)}");
             }
 
             return Ok(await query.ToListAsync());
@@ -79,7 +92,9 @@ namespace ColtonsApp.Controllers
         [Route("UpdateProduct/{id}")]
         public async Task<ActionResult> UpdateProduct(Guid id, [FromBody] Product updatedProduct)
         {
-            // in the future make it so each property on Product is nullable, and only update if a value is provided
+            //TODO - in the future make it so each property on Product is nullable, and only update if a value is provided
+            
+            //TODO - make it so the user cannot update the id, only query by it
 
             if (updatedProduct == null)
             {

@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace ColtonsApp
+namespace ColtonsApp.Items
 {
     public class Product
     {
         [Key]
-        [JsonIgnore]
+        //[JsonIgnore]
         public Guid Id { get; set; }
 
         public string? Name { get; set; }

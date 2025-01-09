@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ColtonsApp.Items;
+using Microsoft.EntityFrameworkCore;
 
 namespace ColtonsApp.DatabaseContexts
 {
