@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ColtonsApp\ColtonsApp.csproj" />
+    <ProjectReference Include="..\ColtonsApp\OrderProcessing.csproj" />
   </ItemGroup>
 
   <ItemGroup>

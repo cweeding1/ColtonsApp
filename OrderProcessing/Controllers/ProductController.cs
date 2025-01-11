@@ -1,9 +1,9 @@
-﻿using ColtonsApp.DatabaseContexts;
-using ColtonsApp.Items;
+﻿using OrderProcessing.DatabaseContexts;
+using OrderProcessing.Items;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace ColtonsApp.Controllers
+namespace OrderProcessing.Controllers
 {
     [ApiController]
     [Route("[controller]")]

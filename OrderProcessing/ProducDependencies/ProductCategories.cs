@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace ColtonsApp.ProducDependencies
+namespace OrderProcessing.ProducDependencies
 {
     enum ProductCategories
     {
